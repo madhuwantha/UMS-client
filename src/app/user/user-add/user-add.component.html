@@ -1,0 +1,155 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Add User</strong>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="submit()" [formGroup]="userForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label" for="user_name">User Name </label>
+            <div class="col-md-9">
+              <input formControlName="user_name" type="text" id="user_name" class="form-control" placeholder="user name">
+            </div>
+          </div>
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label" for="email">Email </label>
+            <div class="col-md-9">
+              <input formControlName="email" type="email" id="email" class="form-control" placeholder="email">
+            </div>
+          </div>
+
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label" for="device_token">Device Token </label>
+            <div class="col-md-9">
+              <input formControlName="device_token" type="text" id="device_token" class="form-control" placeholder="device token">
+            </div>
+          </div>
+
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Is Premium User </label>
+            <div class="col-md-9">
+              <div class="form-check form-check-inline mr-1">
+                <input formControlName="is_premium_user" class="form-check-input" type="radio"   [value]="true">
+                <label class="form-check-label" >Yes</label>
+              </div>
+              <div class="form-check form-check-inline mr-1">
+                <input formControlName="is_premium_user" class="form-check-input" type="radio"   [value]="false">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Did accept to sand privacy policy </label>
+            <div class="col-md-9">
+              <div class="form-check form-check-inline mr-1">
+                <input formControlName="did_accept_to_sand_privacy_policy" class="form-check-input" type="radio"   [value]="true">
+                <label class="form-check-label" >Yes</label>
+              </div>
+              <div class="form-check form-check-inline mr-1">
+                <input formControlName="did_accept_to_sand_privacy_policy" class="form-check-input" type="radio"   [value]="false">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label" for="date_accepted_to_sand_privacy_policy">Date accept to sand privacy policy </label>
+            <div class="col-md-9">
+              <input formControlName="date_accepted_to_sand_privacy_policy" type="date" id="date_accepted_to_sand_privacy_policy" class="form-control" placeholder="Name">
+            </div>
+          </div>
+
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label" >Fire monitoring is on </label>
+            <div class="col-md-9">
+              <div class="form-check form-check-inline mr-1">
+                <input formControlName="fire_monitoring_is_on" class="form-check-input" type="radio"   [value]="true">
+                <label class="form-check-label" >Yes</label>
+              </div>
+              <div class="form-check form-check-inline mr-1">
+                <input formControlName="fire_monitoring_is_on" class="form-check-input" type="radio"   [value]="false">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Weather monitoring is on </label>
+            <div class="col-md-9 col-form-label">
+              <div class="form-check form-check-inline mr-1" >
+                <input formControlName="weather_monitoring_is_on" class="form-check-input" type="radio"   [value]="true">
+                <label class="form-check-label" >Yes</label>
+              </div>
+              <div class="form-check form-check-inline mr-1">
+                <input formControlName="weather_monitoring_is_on" class="form-check-input" type="radio"   [value]="false">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label"> Properties <span (click)="add()" class="span-bts" type="nnn">+</span></label>
+
+            <div class="col-md-9 col-form-label" formArrayName="properties">
+              <div class="card" *ngFor="let pForm of properties.controls; let i = index" >
+
+                <form class="r form-group row p" [formGroup]="getFormGroup(pForm)">
+                  <div class="r form-group row">
+                    <label class="col-md-3 col-form-label" for="device_token">Property name </label>
+                    <div class="col-md-9">
+                      <input formControlName="property_name" type="text" id="property_name" class="form-control" placeholder="property name">
+                    </div>
+                  </div>
+
+                  <div class="r form-group row">
+                    <label class="col-md-3 col-form-label" for="device_token">Property address </label>
+                    <div class="col-md-9">
+                      <input formControlName="property_address" type="text" id="property_address" class="form-control" placeholder="Property address">
+                    </div>
+                  </div>
+
+                  <div class="r form-group row">
+                    <label class="col-md-3 col-form-label" for="radius">Radius</label>
+                    <div class="col-md-9">
+                      <input formControlName="radius" type="number" id="radius" class="form-control" placeholder="radius">
+                    </div>
+                  </div>
+
+                  <div class="r form-group row">
+                    <label class="col-md-3 col-form-label" for="latitude">Latitude </label>
+                    <div class="col-md-9">
+                      <input formControlName="latitude" type="number" id="latitude" class="form-control" placeholder="latitude">
+                    </div>
+                  </div>
+
+                  <div class="r form-group row">
+                    <label class="col-md-3 col-form-label" for="device_token">Longitude </label>
+                    <div class="col-md-9">
+                      <input formControlName="longitude" type="number" id="longitude" class="form-control" placeholder="longitude">
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+<div class="col-8">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">User name</span>
+    </div>
+    <input [value]="user.user_name" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Email</span>
+    </div>
+    <input [value]="user.email " disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Device token</span>
+    </div>
+    <input [value]="user.device_token " disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Did accept to sand privacy policy </span>
+    </div>
+    <input [value]="user.did_accept_to_sand_privacy_policy ? 'Yes': 'No'" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Date accept to sand privacy policy </span>
+    </div>
+    <input [value]="user.date_accepted_to_sand_privacy_policy" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Fire monitoring is on </span>
+    </div>
+    <input [value]="user.fire_monitoring_is_on ? 'Yes': 'No'" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Weather monitoring is on  </span>
+    </div>
+    <input [value]="user.weather_monitoring_is_on ? 'Yes': 'No'" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Is Premium User </span>
+    </div>
+    <input [value]="user.is_premium_user ? 'Yes': 'No'" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <div class="r form-group row">
+    <a [routerLink]="['../../list',]" type="button" cDropdownItem>View</a>
+    <label class="col-md-3 col-form-label"> Properties <span (click)="add()" class="span-bts" type="nnn">+</span></label>
+    <form (ngSubmit)="submit()" [formGroup]="userForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+      <div class="col-md-9 col-form-label" formArrayName="properties">
+        <div class="card" style="padding: 15px" *ngFor="let pForm of properties.controls; let i = index" >
+          <form class="r form-group row p" [formGroup]="getFormGroup(pForm)">
+            <div class="r form-group row">
+              <label class="col-md-3 col-form-label">Property name </label>
+              <div class="col-md-9">
+                <input formControlName="property_name" type="text" id="property_name" class="form-control" placeholder="property name">
+              </div>
+            </div>
+
+            <div class="r form-group row">
+              <label class="col-md-3 col-form-label">Property address </label>
+              <div class="col-md-9">
+                <input formControlName="property_address" type="text" id="property_address" class="form-control" placeholder="Property address">
+              </div>
+            </div>
+
+            <div class="r form-group row">
+              <label class="col-md-3 col-form-label" for="radius">Radius</label>
+              <div class="col-md-9">
+                <input formControlName="radius" type="number" id="radius" class="form-control" placeholder="radius">
+              </div>
+            </div>
+
+            <div class="r form-group row">
+              <label class="col-md-3 col-form-label" for="latitude">Latitude </label>
+              <div class="col-md-9">
+                <input formControlName="latitude" type="number" id="latitude" class="form-control" placeholder="latitude">
+              </div>
+            </div>
+
+            <div class="r form-group row">
+              <label class="col-md-3 col-form-label">Longitude </label>
+              <div class="col-md-9">
+                <input formControlName="longitude" type="number" id="longitude" class="form-control" placeholder="longitude">
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <div *ngIf="properties.controls.length > 0" class="form-group row">
+        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+      </div>
+    </form>
+
+
+      <div class="card" style="padding: 10px" *ngFor="let property of user.properties; let i = index" >
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Property name</span>
+          </div>
+          <input [value]="property.property_name" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Radius </span>
+          </div>
+          <input [value]="property.radius " disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Latitude </span>
+          </div>
+          <input [value]="property.latitude " disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Longitude </span>
+          </div>
+          <input [value]="property.longitude " disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Property address</span>
+          </div>
+          <input [value]="property.property_address" disabled="disabled" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+    </div>
+  </div>
+
+<!--  <div  class="input-group mb-3" style="float: right">-->
+<!--    <button  class="btn bg-primary">Activate</button>-->
+<!--    <button  class="btn bg-danger">Reject</button>-->
+<!--  </div>-->
+</div>

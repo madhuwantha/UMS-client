@@ -1,0 +1,13 @@
+.app-body{
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-size: 1200px;
+}
+.img{
+    width: 20%;
+}
+
+.err{
+    margin-top: -14px;
+}
