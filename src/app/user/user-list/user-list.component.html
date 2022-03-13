@@ -18,9 +18,11 @@
             <td>{{user.user_name}}</td>
             <td>{{user.email}}</td>
             <td>
-              <a [routerLink]="['../view', user.custom_id]" type="button" cDropdownItem>View</a>
-              <a [routerLink]="['../edit', user.custom_id]" type="button" cDropdownItem>Edit</a>
-              <button (click)="delete($event)" [value]="user.custom_id" type="button" cDropdownItem>Delete</button>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a [routerLink]="['../view', user.custom_id]" type="button" class="btn btn-secondary">View</a>
+                <a [routerLink]="['../edit', user.custom_id]" type="button" class="btn btn-secondary">Edit</a>
+                <button (click)="delete($event)" [value]="user.custom_id" type="button" class="btn btn-secondary">Delete</button>
+              </div>
             </td>
           </tr>
           </tbody>

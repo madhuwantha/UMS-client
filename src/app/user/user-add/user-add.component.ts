@@ -55,7 +55,7 @@ export class UserAddComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed){
           this.userService.add(this.userForm.value).subscribe(r => {
-            console.log(r)
+            this.router.navigate(['/user/list'])
           })
         }
       })

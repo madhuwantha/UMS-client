@@ -6,6 +6,7 @@ import {RegisterComponent} from "./views/register/register.component";
 import {P404Component} from "./views/error/404.component";
 import {P500Component} from "./views/error/500.component";
 import {LoginComponent} from "./views/login/login.component";
+import {AuthGuard} from "./helpers/auth-gard";
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
       {
         path: 'user',
         loadChildren: () =>
-          import('./user/user.module').then((m) => m.UserModule)
+          import('./user/user.module').then((m) => m.UserModule),
+        canActivate: [AuthGuard]
       },
     ]
   },

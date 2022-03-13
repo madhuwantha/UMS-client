@@ -27,4 +27,8 @@ export class AuthService {
     })
   }
 
+  token(){
+    return localStorage.getItem('access')
+  }
+
 }
