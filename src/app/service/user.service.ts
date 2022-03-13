@@ -21,16 +21,20 @@ export class UserService {
     return this.http.post(`${this.url}/add-property/`,property);
   }
 
-  // update (user: any) {
-  //   return this.http.put(`${this.url}/user`,user);
-  // }
+  update (user: User, id: number) {
+    return this.http.put(`${this.url}/update/${id}/`, {...user, modified: new Date()});
+  }
+
   get(id: number){
     return this.http.get<User>(`${this.url}/get/${id}/`);
   }
   getAll(){
     return this.http.get<any>(`${this.url}/all/`);
   }
-  // delete(uuid: string){
-  //   return this.http.delete(`${this.url}/user/${uuid}`);
-  // }
+  delete(user_id: string){
+    return this.http.post(`${this.url}/remove/`,{custom_id: user_id});
+  }
+  deleteProperty(id: number | string){
+    return this.http.post(`${this.url}/remove/property/`,{p_id: id});
+  }
 }

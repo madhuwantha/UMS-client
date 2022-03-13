@@ -1,7 +1,8 @@
 import {Property} from "./property";
 
 export interface User {
-  id: String | null | undefined;
+  id: number;
+  custom_id: String | null | undefined;
   user_name: String | null | undefined;
   email: String | null | undefined;
   device_token: String | null | undefined;

@@ -4,6 +4,7 @@ import {UserService} from "../../service/user.service";
 import {User} from "../../models/user";
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Property} from "../../models/property";
+import {ConfirmationDialogService} from "../../service/confirmation-dialog.service";
 
 @Component({
   selector: 'app-user-view',
@@ -12,7 +13,9 @@ import {Property} from "../../models/property";
 })
 export class UserViewComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute,private router: Router, private userService: UserService, private fb: FormBuilder) { }
+  constructor(
+    private confirmationDialogService: ConfirmationDialogService,
+    private activatedRoute: ActivatedRoute,private router: Router, private userService: UserService, private fb: FormBuilder) { }
 
 
   public user!: User;
@@ -50,9 +53,33 @@ export class UserViewComponent implements OnInit {
   submit() {
     const properties: Property[] = this.userForm.value.properties
     properties.forEach(p => {
-      this.userService.addProperty({...p, user_id: this.user.id}).subscribe(r => {
-        this.router.navigate(['../../list'])
+      this.userService.addProperty({...p, user_id: this.user.custom_id}).subscribe(r => {
+        this.activatedRoute.params.subscribe(s => {
+          this.userService.get(s["id"]).subscribe(u => {
+            this.user = u;
+            this.userForm.reset();
+          })
+        });
       })
     })
+  }
+
+  removeProperty(property: Property) {
+    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete ?')
+      .then((confirmed) => {
+        if (confirmed){
+          this.userService.deleteProperty(property.id).subscribe(r => {
+            this.activatedRoute.params.subscribe(s => {
+              this.userService.get(s["id"]).subscribe(u => {
+                this.user = u;
+              })
+            });
+            console.log(r)
+          })
+        }
+      })
+      .catch(() => {
+        console.log("err")
+      });
   }
 }

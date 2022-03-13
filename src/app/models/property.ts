@@ -1,5 +1,5 @@
 export interface Property {
-  is: String | null | undefined;
+  id: number;
   user_id: String | null | undefined;
   radius: String | null | undefined;
   latitude: String | null | undefined;

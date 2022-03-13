@@ -50,6 +50,7 @@ import {LoginComponent} from "./views/login/login.component";
 import {RegisterComponent} from "./views/register/register.component";
 import {P500Component} from "./views/error/500.component";
 import {P404Component} from "./views/error/404.component";
+import {ConfirmationDialogService} from "./service/confirmation-dialog.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -93,6 +94,7 @@ const APP_CONTAINERS = [
     HttpClientModule,
   ],
   providers: [
+    ConfirmationDialogService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, FormArray, FormBuilder, AbstractControl} from "@angular/forms";
 import {UserService} from "../../service/user.service";
+import {ConfirmationDialogService} from "../../service/confirmation-dialog.service";
 
 @Component({
   selector: 'app-user-add',
@@ -10,9 +11,10 @@ import {UserService} from "../../service/user.service";
 })
 export class UserAddComponent implements OnInit {
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) { }
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService, private confirmationDialogService: ConfirmationDialogService) { }
 
   userForm = this.fb.group({
+    user_id: new FormControl(''),
     user_name: new FormControl(''),
     email: new FormControl(''),
     device_token: new FormControl(''),
@@ -49,10 +51,17 @@ export class UserAddComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.userForm.value)
-    this.userService.add(this.userForm.value).subscribe(r => {
-      console.log(r)
-    })
+    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to save ?')
+      .then((confirmed) => {
+        if (confirmed){
+          this.userService.add(this.userForm.value).subscribe(r => {
+            console.log(r)
+          })
+        }
+      })
+      .catch(() => {
+        console.log("err")
+      });
   }
 
 }

@@ -6,6 +6,8 @@ import { UserViewComponent } from './user-view/user-view.component';
 import {RouterModule, Routes} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {DropdownModule} from "@coreui/angular";
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -21,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'view/:id',
     component:  UserViewComponent
+  },
+  {
+    path: 'edit/:id',
+    component:  UserEditComponent
   }
 ]
 
@@ -28,7 +34,9 @@ export const routes: Routes = [
   declarations: [
     UserAddComponent,
     UserListComponent,
-    UserViewComponent
+    UserViewComponent,
+    UserEditComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     RouterModule.forChild(routes),
